@@ -1,0 +1,135 @@
+Peldet (PSP Telnet) 0.8b cygwinsux edition.
+Coded by Danzel ( http://localhost.geek.nz/telnet/   danzel ATGOESHERELOL localhost.geek.nz )
+
+Thanks to Arwin for P-sprint and to PSPPet for the initial wifi code :)
+
+This uses p-sprint for all text input, so go read up on it at its site:
+http://www.niwra.nl/psp/p-sprint-c/doc/index.htm
+
+Usage:
+Drop the folder onto your psp like normal.
+Load it up, chose a wifi to connect to.
+Chose either a site from your favorites or enter in new details and hit start.
+Enjoy.
+
+An example favorites file is included (peldetfav.txt)
+It goes in the root dir of your memory stick.
+ Line Format:
+eu.undernet.org:6667 irc mynickname #somechan a descriptive string
+-- this is an irc favorite for eu.undernet.org on port 6667, with nickname 'mynickname' and channel '#somechan' and the description 'a descriptive string'
+
+mud.rod.org:3000 telnetmud ROD MUD
+-- this is a telnet favorite with the description 'ROD MUD', it uses mud style input
+
+my.telnet.shell:23 telnet my telnet
+-- this is a telnet favorite with the description 'my telnet', it uses real telnet style input
+
+
+Supports:
+Favorites
+Connect to ip/dns
+Show the on screen keyboard (R shoulder to show/hide)
+VT100 Telnet, IRC
+
+IRC Support:
+Works on the servers i've tryed it on (undernet efnet irc2toc)
+Should work on most, if you encounter one it doesnt work on please tell me and i'll fix it :)
+
+IRC Commands Supported:
+/m nick hello joe : same as /msg on a normal irc client
+/q bye everyone   : same as /quit
+/me shouts lol    : action, same as a normal client
+Other commands that you enter starting with a / will be sent straight to the server
+so if you enter '/join #somechan' it will send 'join #somechan' to the server, this should allow you to enter any command you need to, it'll just get ugly. More commands will be properly implemented in the future. (We only really support you being in one channel, although try join more for some interesting results, lol)
+
+Colors:
+Yellow - Server Message
+Blue - channel details messsage (Topic, whos in chan)
+Green - Action
+Purple - Private Message
+Grey - Channel Message
+
+
+Telnet:
+Now with 0.8 there is proper vt100 emulation and some limited telnet protocol negotiations, enough atleast to get onto a telnetd and use links, mplayer, vi, etc :)
+If an app you are running isnt working right, try run it with a different term environmental var (the default is xterm)
+TERM=vt100 links; TERM=ansi links; TERM=linux links
+If you are planning to use telnet, READ THE P_SPRINT WEBSITE, it tells you how to use the other input modes, to get arrow keys and stuff :D
+
+Limitations/TODO:
+Some telnet escape sequences arent supported :) Blink, Underline, linewrap
+IRC Colors, bold etc arent supported and make quite a mess.
+
+
+TODO:
+Make less ugly ;)
+Add more escape Sequences
+Change render to use the blocking call (i think)
+Lots more IRC bits :) (passworded servers etc...)
+DNS lookup shouldnt block the program on failure.
+When you get disconnected you should be returned to a menu.
+Multiple channels using tabs.
+
+
+Version History:
+0.8b
+Did some additions to get connecting to cygwins telnetd working.
+Some big changes to the renderer, now it is called directly instead of with message passing. This gives some big speed ups (libcaca mplayer is almost compeletely smooth at default speed). I was hoping to hold this for the next version, but as my CVS server machine has died I'm including it now.
+This may lead to a crash as I haven't thread safed it yet, but malloc/free is called much less, so there shouldnt be crashes related to that anymore.
+
+
+0.8a
+Fixed the irc bug I added in 0.8 (One whole line, the _only_ line that changed between 0.7 and 0.8 lol)
+
+0.8
+fixed some p_sprint bugs, 8/9 were backwards in the code, x is incorrect in the image.
+Much better telnet support, I've implemented a vt100 emulator, currently it lacks a few features and seems to have some bugs, but it is good for most programs.
+This means ofcourse that you can connect to a telnetd and run all your favorite console linux apps.
+I recommend links (OMG WEB BROWSER ON PSP OMG HAX) and BitchX (Much better IRC than in peldet currently).
+There is a few bugs in the vt100 emulation, nano doesnt work with the default term, use TERM=vt100.
+I had colors in nethack when I was telnetting to a debian sarge machine, but it doesnt have them on my gentoo box... I'll investiate how its figuring out if to use them and fix it :D
+Its also quite difficult to play nethack at the moment, I plan to make a custom keyboard setting for it to make it more playable.
+THERE IS CURRENTLY SOME BUGS WHEN USING TELNET: eventually it will crash to a blue screen, if you can send me the stack trace and an explanation of what you were doing it would be much appreciated.
+Also if a program renders incorrectly, send me the version and OS and I'll have a look.
+
+0.7
+The codebase has been really thrashed to get in multiple protocol support :)
+There is still a bit to do, but it can wait for the next version.
+IRC SUPPORT :O some limitations
+When connecting to wifi it will keep trying untill it gets on.
+Scrollable screen. (Use the analog stick)
+Lots more I forget zzzzz.
+Background menu image by DuEy :)
+
+0.6
+Render now uses the Gu Functions, so the flickery keyboard is gone and rendering is much Better.
+Better seperation of code thanks to some cleanups.
+
+0.5
+DNS lookups :D
+The ip input format is now proper: 10.14.10.211:23 and such
+Favorites format has changed to a more sane format
+Plenty more escape sequences added, Only tabs, color, 'scroll' to go :)
+
+0.4
+Now uses a font i hand drew myself :)
+Now we have an 80x24 console with full ascii art characters.
+An initial Escape sequence has been added ( ^[H ) which is reset whole screen, this makes ascii starwars almost viewable, lol!!!!
+Few bug fixes and additions because of the new rendering code.
+
+0.3
+Onscreen display of the keyboard (hit R to show/hide)
+Error Messages are a bit more meaningful sometimes.
+Actually updated the version string!
+
+0.2
+Few code Cleanups
+Got exit working correctly
+Made the text scrolling not suck as much
+Added favorites and ability to connect to ip
+User can chose the wifi connection to use (dhcp should work)
+
+0.01
+Connection details hardcoded to RoD (www.rod.org)
+Scrolling of text when screen gets full sorta sucks
+Always uses the first wifi connection

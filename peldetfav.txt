@@ -1,0 +1,4 @@
+mud.rod.org:3000 telnetmud ROD DNS
+towel.blinkenlights.nl:23 telnet Ascii starwars
+161.53.178.240:6667 irc peldetp8i #hamlan zagreb.hr.eu.undernet.org ip
+66.198.80.67:6667 irc peldetp8j #hamlan miami.fl.us.undernet.org ip
